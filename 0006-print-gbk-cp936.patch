@@ -1,0 +1,530 @@
+diff --git a/lib/cp936.h b/lib/cp936.h
+--- a/lib/cp936.h
++++ b/lib/cp936.h
+@@ -46,6 +46,7 @@
+  * point, they are useful for some people in practice.
+  */
+ 
++#include <stdio.h>
+ static int
+ cp936_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+ {
+@@ -63,17 +64,18 @@ cp936_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+       return 1;
+     }
+     /* User-defined characters */
+-    if (c >= 0xa1 && c <= 0xa2) {
++    /* reference GB18030_2022 */
++    if (c >= 0xa1 && c <= 0xa7) {
+       if (n < 2)
+         return RET_TOOFEW(0);
+       {
+         unsigned char c2 = s[1];
+-        if ((c2 >= 0x40 && c2 < 0x7f) || (c2 >= 0x80 && c2 < 0xa1)) {
++        if (c2 >= 0x40 && c2 < 0xa1 && c2 != 0x7f) {
+           *pwc = 0xe4c6 + 96 * (c - 0xa1) + (c2 - (c2 >= 0x80 ? 0x41 : 0x40));
+           return 2;
+         }
+       }
+-    } else if ((c >= 0xaa && c < 0xb0) || (c >= 0xf8 && c < 0xff)) {
++    } else if ((c >= 0xaa && c < 0xaf) || (c >= 0xf8 && c < 0xff)) {
+       if (n < 2)
+         return RET_TOOFEW(0);
+       {
+@@ -88,21 +90,53 @@ cp936_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+   return RET_ILSEQ;
+ }
+ 
+-static int
+-cp936_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+-{
++static const unsigned short cp936_gb18030_2022_pua2charset[23*3] = {
++/* Unicode range   GB18030 range */
++  0xe766, 0xe76b,  0xa2ab, /*.. 0xa2b0, */
++  0xe76d, 0xe76d,  0xa2e4,
++  0xe76e, 0xe76f,  0xa2ef, /*.. 0xa2f0, */
++  0xe770, 0xe771,  0xa2fd, /*.. 0xa2fe, */
++  0xe772, 0xe77c,  0xa4f4, /*.. 0xa4fe, */
++  0xe77d, 0xe784,  0xa5f7, /*.. 0xa5fe, */
++  0xe785, 0xe78c,  0xa6b9, /*.. 0xa6c0, */
++  0xe797, 0xe79f,  0xa6f6, /*.. 0xa6fe, */
++  0xe7a0, 0xe7ae,  0xa7c2, /*.. 0xa7d0, */
++  0xe7af, 0xe7bb,  0xa7f2, /*.. 0xa7fe, */
++  0xe7bc, 0xe7c6,  0xa896, /*.. 0xa8a0, */
++  0xe7c9, 0xe7cc,  0xa8c1, /*.. 0xa8c4, */
++  0xe7cd, 0xe7e1,  0xa8ea, /*.. 0xa8fe, */
++  0xe7e2, 0xe7e2,  0xa958,
++  0xe7e3, 0xe7e3,  0xa95b,
++  0xe7e4, 0xe7e6,  0xa95d, /*.. 0xa95f, */
++  0xe7f4, 0xe800,  0xa997, /*.. 0xa9a3, */
++  0xe801, 0xe80f,  0xa9f0, /*.. 0xa9fe, */
++  0xe810, 0xe814,  0xd7fa, /*.. 0xd7fe, */
++  0xe816, 0xe818,  0xfe51, /*.. 0xfe53, */
++  0xe831, 0xe831,  0xfe6c,
++  0xe83b, 0xe83b,  0xfe76,
++  0xe855, 0xe855,  0xfe91,
++};
++
++
++static int cp936_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, size_t n) {
+   /* Try GBK first. */
++  printf("begin---------cp936.h-----------\n");
++  printf("cp936.h -> wc: %x ", wc);
+   {
+-    int ret = ces_gbk_wctomb(conv,r,wc,n);
++    int ret = ces_gbk_wctomb(conv, r, wc, n);
++    printf("cp936.h -> cp936_wctomb -> ces_gbk_wctomb: runned. \n");
+     if (ret != RET_ILUNI)
+       return ret;
+   }
+   /* Then handle the additional mappings. */
+-  if (wc >= 0xe000 && wc < 0xe586) {
++  /* reference GB18030_2022 */
++  if (wc >= 0xe000 && wc < 0xe766) {
++    printf("cp936.h -> cp936_wctomb -> additional mappings: runned. \n");
+     /* User-defined characters */
+     if (n < 2)
+       return RET_TOOFEW(0);
+     if (wc < 0xe4c6) {
++      printf("cp936.h -> cp936_wctomb -> wc < 0xe4c6: runned. \n");
+       unsigned int i = wc - 0xe000;
+       unsigned int c1 = i / 94;
+       unsigned int c2 = i % 94;
+@@ -110,6 +144,7 @@ cp936_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+       r[1] = c2 + 0xa1;
+       return 2;
+     } else {
++      printf("cp936.h -> cp936_wctomb -> wc > 0xe4c6: runned. \n");
+       unsigned int i = wc - 0xe4c6;
+       unsigned int c1 = i / 96;
+       unsigned int c2 = i % 96;
+@@ -118,8 +153,10 @@ cp936_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+       return 2;
+     }
+   } else if (wc == 0x20ac) {
++    printf("cp936.h -> cp936_wctomb -> wc = 0x20ac: runned. \n");
+     r[0] = 0x80;
+     return 1;
+    }
+   }
++  printf("end---------cp936.h-----------\n");
+   return RET_ILUNI;
+ }
+diff --git a/lib/gb18030_2022.h b/lib/gb18030_2022.h
+--- a/lib/gb18030_2022.h
++++ b/lib/gb18030_2022.h
+@@ -140,6 +140,8 @@ static int
+ gb18030_2022_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+ {
+   int ret;
++  printf("begin---------GB18030_2022.h-----------\n");
++  printf("GB18030_2022.h -> wc: %x ", wc);
+ 
+   /* Code set 0 (ASCII) */
+   ret = ascii_wctomb(conv,r,wc,n);
+@@ -147,16 +149,27 @@ gb18030_2022_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+     return ret;
+ 
+   /* Code set 1 (GBK extended) */
++  /*
++#ifdef _WIN32
++  ret = cp936_wctomb(conv,r,wc,n);
++    printf("GB18030_2022.h -> cp936_wctomb ->  runned. \n");
++  if (ret != RET_ILUNI)
++    return ret;
++#else
++*/
+   ret = gbk_wctomb(conv,r,wc,n);
++    printf("GB18030_2022.h -> gbk_wctomb->  runned. \n");
+   if (ret != RET_ILUNI)
+     return ret;
+-
++// #endif
+   ret = gb18030ext_wctomb(conv,r,wc,n);
++    printf("GB18030_2022.h -> gb18030ext_wctomb ->  runned. \n");
+   if (ret != RET_ILUNI)
+     return ret;
+ 
+   /* Code set 2 (remainder of Unicode U+0000..U+FFFF) */
+   if (wc >= 0xe000 && wc <= 0xe864) {
++    printf("GB18030_2022.h -> 0xe000 - 0xe864 ->  runned. \n");
+     if (n >= 2) {
+       if (wc < 0xe766) {
+         /* User-defined characters range U+E000..U+E765 */
+@@ -196,6 +209,7 @@ gb18030_2022_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+       return RET_TOOSMALL;
+   }
+   ret = gb18030_2022_uni_wctomb(conv,r,wc,n);
++    printf("GB18030_2022.h -> gb18030_2022_uni_wctomb ->  runned. \n");
+   if (ret != RET_ILUNI)
+     return ret;
+ 
+diff --git a/lib/gbk.h b/lib/gbk.h
+--- a/lib/gbk.h
++++ b/lib/gbk.h
+@@ -58,6 +58,7 @@
+ #include "gbkext2.h"
+ #include "gbkext_inv.h"
+ #include "cp936ext.h"
++#include <stdio.h>
+ 
+ static int
+ gbk_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+@@ -68,6 +69,7 @@ gbk_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+     if (n < 2)
+       return RET_TOOFEW(0);
+     if (c >= 0xa1 && c <= 0xf7) {
++      printf("gbk.h - gbk_mbtowc - 0xa1 - 0xf7 Running\n");
+       unsigned char c2 = s[1];
+       if (c == 0xa1) {
+         if (c2 == 0xa4) {
+@@ -80,14 +82,17 @@ gbk_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+         }
+       }
+       if (c2 >= 0xa1 && c2 < 0xff) {
++      printf("gbk.h - gbk_mbtowc - (0xa1 - 0xf7)(0xa1 - 0xff) Running\n");
+         unsigned char buf[2];
+         int ret;
+         buf[0] = c-0x80; buf[1] = c2-0x80;
+         ret = gb2312_mbtowc(conv,pwc,buf,2);
++      printf("gbk.h - gbk_mbtowc - (0xa1 - 0xf7)(0xa1 - 0xff) - gb2312_mbtowc Runned\n");
+         if (ret != RET_ILSEQ)
+           return ret;
+         buf[0] = c; buf[1] = c2;
+         ret = cp936ext_mbtowc(conv,pwc,buf,2);
++      printf("gbk.h - gbk_mbtowc - (0xa1 - 0xf7)(0xa1 - 0xff) - cp936ext_mbtowc Runned\n");
+         if (ret != RET_ILSEQ)
+           return ret;
+       }
+@@ -112,9 +117,12 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+ {
+   unsigned char buf[2];
+   int ret;
++  printf("begin---------gbk.h-----------\n");
++  printf("gbk.h -> wc: %x ", wc);
+ 
+   if (wc != 0x30fb && wc != 0x2015) {
+     ret = gb2312_wctomb(conv,buf,wc,2);
++    printf("gbk.h -> gbk_wctomb -> gb2312_wctomb : runned. \n");
+     if (ret != RET_ILUNI) {
+       if (ret != 2) abort();
+       if (n < 2)
+@@ -125,6 +133,7 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+     }
+   }
+   ret = gbkext_inv_wctomb(conv,buf,wc,2);
++  printf("gbk.h -> gbk_wctomb -> gbkext_inv_wctomb: runned. \n");
+   if (ret != RET_ILUNI) {
+     if (ret != 2) abort();
+     if (n < 2)
+@@ -133,6 +142,7 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+     r[1] = buf[1];
+     return 2;
+   }
++  printf("gbk.h -> gbk_wctomb -> Roman: runned. \n");
+   if (wc >= 0x2170 && wc <= 0x2179) {
+     if (n < 2)
+       return RET_TOOSMALL;
+@@ -141,6 +151,7 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+     return 2;
+   }
+   ret = cp936ext_wctomb(conv,buf,wc,2);
++  printf("gbk.h -> gbk_wctomb -> cp936ext_wctomb: runned. \n");
+   if (ret != RET_ILUNI) {
+     if (ret != 2) abort();
+     if (n < 2)
+@@ -149,6 +160,7 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+     r[1] = buf[1];
+     return 2;
+   }
++  printf("gbk.h -> gbk_wctomb -> specail char: runned. \n");
+   if (wc == 0x00b7) {
+     if (n < 2)
+       return RET_TOOSMALL;
+@@ -164,5 +176,6 @@ gbk_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+     return 2;
+   }
+ 
++  printf("end---------gbk.h-----------\n");
+   return RET_ILUNI;
+ }
+diff --git a/lib/loop_unicode.h b/lib/loop_unicode.h
+--- a/lib/loop_unicode.h
++++ b/lib/loop_unicode.h
+@@ -20,6 +20,13 @@
+ /* This file defines the conversion loop via Unicode as a pivot encoding. */
+ 
+ /* Attempt to transliterate wc. Return code as in xxx_wctomb. */
++#include <stdio.h>
++void print_hex(const char* buf, size_t len) {
++    for (size_t i = 0; i < len; ++i) {
++        printf("%02x ", (unsigned char)buf[i]);
++    }
++    printf("\n");
++}
+ static int unicode_transliterate (conv_t cd, ucs4_t wc,
+                                   unsigned char* outptr, size_t outleft)
+ {
+@@ -264,6 +271,9 @@ static size_t unicode_loop_convert (iconv_t icd,
+   size_t result = 0;
+   const unsigned char* inptr = (const unsigned char*) *inbuf;
+   size_t inleft = *inbytesleft;
++  printf("loop_unicode.h: ---------------inbuf-----------------\n");
++  print_hex(inptr, inleft);
++  printf("End-loop_unicode.h: ---------------inbuf-----------------\n");
+   unsigned char* outptr = (unsigned char*) *outbuf;
+   size_t outleft = *outbytesleft;
+   while (inleft > 0) {
+@@ -271,6 +281,8 @@ static size_t unicode_loop_convert (iconv_t icd,
+     ucs4_t wc;
+     int incount;
+     int outcount;
++  printf("loop_unicode.h: ---------------inptr-----------------\n");
++  print_hex(inptr, 1);
+     incount = cd->ifuncs.xxx_mbtowc(cd,&wc,inptr,inleft);
+     if (incount < 0) {
+       if ((unsigned int)(-1-incount) % 2 == (unsigned int)(-1-RET_ILSEQ) % 2) {
+@@ -360,9 +372,11 @@ static size_t unicode_loop_convert (iconv_t icd,
+           goto outcount_ok;
+       }
+       if (cd->discard_ilseq & DISCARD_UNCONVERTIBLE) {
++        printf("DISCARD_UNCONVERTIBLE \n");
+         outcount = 0;
+         goto outcount_ok;
+       } else if (cd->fallbacks.uc_to_mb_fallback != NULL) {
++        printf("call fallbacks.uc_to_mb_fallback\n");
+         struct uc_to_mb_fallback_locals locals;
+         locals.l_outbuf = outptr;
+         locals.l_outbytesleft = outleft;
+@@ -381,12 +395,14 @@ static size_t unicode_loop_convert (iconv_t icd,
+         outcount = 0;
+         goto outcount_ok;
+       }
++      printf("Unicode Replacement Character(0xFFFD)\n");
+       outcount = cd->ofuncs.xxx_wctomb(cd,outptr,0xFFFD,outleft);
+       if (outcount != RET_ILUNI)
+         goto outcount_ok;
+       cd->istate = last_istate;
+       errno = EILSEQ;
+       result = -1;
++      printf("Convert failed and return\n");
+       break;
+     outcount_ok:
+       if (outcount < 0) {
+@@ -399,10 +415,14 @@ static size_t unicode_loop_convert (iconv_t icd,
+         (*cd->hooks.uc_hook)(wc, cd->hooks.data);
+       if (!(outcount <= outleft)) abort();
+       outptr += outcount; outleft -= outcount;
++      printf("loop_unicode.h: ---------------outbuf-----------------\n");
++      print_hex(*outbuf, *outbytesleft - outleft);
++      printf("End-loop_unicode.h: ---------------outbuf-----------------\n");
+     }
+   outcount_zero:
+     if (!(incount <= inleft)) abort();
+     inptr += incount; inleft -= incount;
++  printf("End-loop_unicode.h: ---------------inptr-----------------\n");
+   }
+   *inbuf = (const char*) inptr;
+   *inbytesleft = inleft;
+diff --git a/tests/table-from.c b/tests/table-from.c
+--- a/tests/table-from.c
++++ b/tests/table-from.c
+@@ -53,12 +53,15 @@ static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned i
+   size_t result;
+   iconv(cd,NULL,NULL,NULL,NULL);
+   result = iconv(cd,(ICONV_CONST char**)&inbuf,&inbytesleft,&outbuf,&outbytesleft);
++  printf("try result: %zu\n", result);
+   if (result != (size_t)(-1))
+     result = iconv(cd,NULL,NULL,&outbuf,&outbytesleft);
+   if (result == (size_t)(-1)) {
+     if (errno == EILSEQ) {
++      printf("try errno - EILSEQ: %zu\n", errno);
+       return -1;
+     } else if (errno == EINVAL) {
++      printf("try errno - EINVAL: %zu\n", errno);
+       return 0;
+     } else {
+       int saved_errno = errno;
+@@ -68,6 +71,7 @@ static int try (iconv_t cd, unsigned char buf[], unsigned int buflen, unsigned i
+       exit(1);
+     }
+   } else if (result > 0) /* ignore conversions with transliteration */ {
++      printf("try errno - ignore: %zu\n", errno);
+     return -1;
+   } else {
+     if (inbytesleft != 0) {
+@@ -139,6 +143,8 @@ int main (int argc, char* argv[])
+         for (i1 = 0; i1 < 0x100; i1++) {
+           buf[1] = i1;
+           result = try(cd,buf,2,out);
++          if (i0 == 0xAF && i1 >= 0xA1 && i1 <= 0xFE )
++              printf("result: %02X%02X -- (%d)\n", i0, i1, result);
+           if (result < 0) {
+           } else if (result > 0) {
+             const char* unicode = ucs4_decode(out,result);
+diff --git a/src/iconv.c b/src/iconv.c
+--- a/src/iconv.c
++++ b/src/iconv.c
+@@ -75,6 +75,7 @@ error (int status, int errnum, const char *message, ...)
+ #endif
+ 
+ #include "gettext.h"
++#include <ctype.h>
+ 
+ #define _(str) gettext(str)
+ 
+@@ -84,6 +85,79 @@ error (int status, int errnum, const char *message, ...)
+ # define xalloc_die abort
+ #endif
+ 
++#ifdef __MINGW64__
++#include <windows.h>
++#define UNICODE
++#define _UNICODE
++#endif
++// 声明 MinGW 内部函数（用于获取宽字符命令行）
++extern int __cdecl __wgetmainargs(
++    int* _Argc,
++    wchar_t*** _Argv,
++    wchar_t*** _Env,
++    int _DoWildCard,
++    int* _StartInfo
++);
++static char **g_utf8_argv = NULL;
++static int g_utf8_argc = 0;
++void print_utf16_hex_without_len(const wchar_t* wstr) {
++    const wchar_t* p = wstr;
++    printf("UTF-16 (LE) hex sequence: ");
++     while (*p != L'\0') {
++    // 每个 wchar_t 拆成两个字节（小端：低字节在前）
++      unsigned char low = (unsigned char)(*p & 0xFF);
++      unsigned char high = (unsigned char)((*p >> 8) & 0xFF);
++      printf("%02X%02X ", low, high);
++      p++;
++    }
++    printf("\n");
++}
++void print_utf16_hex_with_len(const wchar_t* wstr, size_t wlen) {
++    printf("UTF-16 (LE) hex sequence: ");
++    for (size_t i = 0; i < wlen; ++i) {
++        // Windows 使用小端序（LE），所以低字节在前
++        printf("%02X %02X ", (unsigned char)(wstr[i] & 0xFF), (unsigned char)((wstr[i] >> 8) & 0xFF));
++    }
++    printf("\n");
++}
++void init_utf8_argv(int *argc_ptr, char ***argv_ptr) {
++    int argc_w;
++    wchar_t **wargv;
++    wchar_t **wenv;
++    int si = 0;
++
++    // 获取原始宽字符参数
++    __wgetmainargs(&argc_w, &wargv, &wenv, 0, &si);
++
++    // 分配 UTF-8 argv
++    char **utf8_argv = (char **)malloc((argc_w + 1) * sizeof(char *));
++    for (int i = 0; i < argc_w; i++) {
++        print_utf16_hex_without_len(wargv[i]);
++        int len = WideCharToMultiByte(CP_UTF8, 0, wargv[i], -1, NULL, 0, NULL, NULL);
++        utf8_argv[i] = (char *)malloc(len);
++        WideCharToMultiByte(CP_UTF8, 0, wargv[i], -1, utf8_argv[i], len, NULL, NULL);
++        printf("utf8_argv[%d]: %s\n", i, utf8_argv[i]);
++    }
++    utf8_argv[argc_w] = NULL;
++
++    // 保存全局（便于 free）
++    g_utf8_argv = utf8_argv;
++    g_utf8_argc = argc_w;
++
++    // 更新输出参数
++    if (argc_ptr) *argc_ptr = argc_w;
++    if (argv_ptr) *argv_ptr = utf8_argv;
++}
++
++void free_utf8_argv(void) {
++    if (g_utf8_argv) {
++        for (int i = 0; i < g_utf8_argc; i++) {
++            free(g_utf8_argv[i]);
++        }
++        free(g_utf8_argv);
++        g_utf8_argv = NULL;
++    }
++}
+ /* Locale independent test for a decimal digit.
+    Argument can be  'char' or 'unsigned char'.  (Whereas the argument of
+    <ctype.h> isdigit must be an 'unsigned char'.)  */
+@@ -99,7 +173,37 @@ error (int status, int errnum, const char *message, ...)
+ 
+ static int discard_unconvertible = 0;
+ static int silent = 0;
++// 打印单个参数的十六进制表示
++void print_arg_hex(const char *arg, int arg_index) {
++    if (arg == NULL) return;
++
++    printf("Arg[%d] (len=%zu): ", arg_index, strlen(arg));
++    
++    // 先打印十六进制
++    for (size_t i = 0; arg[i] != '\0'; i++) {
++        printf("%02x ", (unsigned char)arg[i]);
++    }
++    printf("\n");
++
++    // 可选：打印 ASCII 可视化（类似 hexdump）
++    printf("                ");
++    for (size_t i = 0; arg[i] != '\0'; i++) {
++        unsigned char c = arg[i];
++        if (isprint(c)) {
++            putchar(c);
++        } else {
++            putchar('.');
++        }
++    }
++    printf("\n");
++}
+ 
++// 打印所有 argv 参数
++void print_argv_hex(int argc, char *argv[]) {
++    for (int i = 0; i < argc; i++) {
++        print_arg_hex(argv[i], i);
++    }
++}
+ static void usage (int exitcode)
+ {
+   if (exitcode != 0) {
+@@ -847,6 +951,21 @@ static int convert (iconv_t cd, int infile, const char* infilename, _GL_UNUSED c
+ 
+ int main (int argc, char* argv[])
+ {
++  LPWSTR *szArglist;
++  int nArgs;
++  szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
++  // 现在 szArglist[i] 是 UTF-16，可自行转换为 UTF-8
++  // ...
++  for (int i = 0; i < nArgs; i++) {
++      printf("nArgs[%d]:", i);
++        print_utf16_hex_without_len(szArglist[i]);
++  }
++  LocalFree(szArglist);
++  /* print_argv_hex(argc, argv); */
++  /* print_utf16_hex_without_len(wargv[i]); */
++  init_utf8_argv(&argc, &argv);
++  printf("=== Command-line arguments in hex ===\n");
++  print_argv_hex(argc, argv);
+   const char* fromcode = NULL;
+   const char* tocode = NULL;
+   int do_list = 0;
+@@ -936,6 +1055,7 @@ int main (int argc, char* argv[])
+         i += 2;
+       } else {
+         ilseq_byte_subst = argv[i]+13;
++        printf("ilseq_byte_subst: %s - %02x\n", ilseq_byte_subst, ilseq_byte_subst[0]);
+         i++;
+       }
+       ilseq_byte_subst_size =
+@@ -1147,5 +1267,6 @@ int main (int argc, char* argv[])
+           _("I/O error"));
+     status = 1;
+   }
++  free_utf8_argv();
+   exit(status);
+ }

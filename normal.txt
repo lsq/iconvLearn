@@ -1,0 +1,8 @@
+gbk.h -> wc: 5b89 gbk.h -> gbk_wctomb -> gb2312_wctomb : runned. 
+gbk.h -> wc: 88c5 gbk.h -> gbk_wctomb -> gb2312_wctomb : runned. 
+gbk.h -> wc: 20ac gbk.h -> gbk_wctomb -> gb2312_wctomb : runned. 
+gbk.h -> gbk_wctomb -> gbkext_inv_wctomb: runned. 
+gbk.h -> gbk_wctomb -> Roman: runned. 
+gbk.h -> gbk_wctomb -> cp936ext_wctomb: runned. 
+gbk.h -> gbk_wctomb -> specail char: runned. 
+°²×°¢ã

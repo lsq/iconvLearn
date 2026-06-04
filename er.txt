@@ -1,0 +1,121 @@
+loop_unicode.h: ---------------inbuf-----------------
+28 e6 a0 87 e5 87 86 e8 be 93 e5 85 a5 29 00 
+End-loop_unicode.h: ---------------inbuf-----------------
+loop_unicode.h: ---------------inptr-----------------
+28 
+loop_unicode.h: ---------------outbuf-----------------
+28 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+e6 
+loop_unicode.h: ---------------outbuf-----------------
+28 e6 a0 87 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+e5 
+loop_unicode.h: ---------------outbuf-----------------
+28 e6 a0 87 e5 87 86 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+e8 
+loop_unicode.h: ---------------outbuf-----------------
+28 e6 a0 87 e5 87 86 e8 be 93 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+e5 
+loop_unicode.h: ---------------outbuf-----------------
+28 e6 a0 87 e5 87 86 e8 be 93 e5 85 a5 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+29 
+loop_unicode.h: ---------------outbuf-----------------
+28 e6 a0 87 e5 87 86 e8 be 93 e5 85 a5 29 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+00 
+loop_unicode.h: ---------------outbuf-----------------
+28 e6 a0 87 e5 87 86 e8 be 93 e5 85 a5 29 00 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inbuf-----------------
+e5 ae 89 e8 a3 85 e5 8c 85 e4 b8 8b e8 bd bd e5 9c b0 e5 9d 80 0a 
+End-loop_unicode.h: ---------------inbuf-----------------
+loop_unicode.h: ---------------inptr-----------------
+e5 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+89 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+a3 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+e5 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+85 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+b8 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac e7 ac 85 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+e8 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac e7 ac 85 e6 9d 9e 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+bd 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac e7 ac 85 e6 9d 9e e8 97 89 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+9c 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac e7 ac 85 e6 9d 9e e8 97 89 e6 b9 b4 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+e5 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac e7 ac 85 e6 9d 9e e8 97 89 e6 b9 b4 e9 8d a7 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+80 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac e7 ac 85 e6 9d 9e e8 97 89 e6 b9 b4 e9 8d a7 e2 82 ac 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+loop_unicode.h: ---------------inptr-----------------
+0a 
+loop_unicode.h: ---------------outbuf-----------------
+e7 80 b9 e5 a4 8e ee 97 8a e9 8d 96 e5 91 ac e7 ac 85 e6 9d 9e e8 97 89 e6 b9 b4 e9 8d a7 e2 82 ac 0a 
+End-loop_unicode.h: ---------------outbuf-----------------
+End-loop_unicode.h: ---------------inptr-----------------
+瀹夎鍖呬笅杞藉湴鍧€

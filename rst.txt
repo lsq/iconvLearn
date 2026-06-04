@@ -1,0 +1,402 @@
+正在读取文件...
+add.txt 条目数: 513
+modify.txt 条目数: 99
+
+找到 99 个相同的 value:
+------------------------------------------------------------
+Value: 0xa6d9
+  add.txt    keys: U+e78d
+  modify.txt keys: U+fe10
+
+Value: 0xa6da
+  add.txt    keys: U+e78e
+  modify.txt keys: U+fe12
+
+Value: 0xa6db
+  add.txt    keys: U+e78f
+  modify.txt keys: U+fe11
+
+Value: 0xa6dc
+  add.txt    keys: U+e790
+  modify.txt keys: U+fe13
+
+Value: 0xa6dd
+  add.txt    keys: U+e791
+  modify.txt keys: U+fe14
+
+Value: 0xa6de
+  add.txt    keys: U+e792
+  modify.txt keys: U+fe15
+
+Value: 0xa6df
+  add.txt    keys: U+e793
+  modify.txt keys: U+fe16
+
+Value: 0xa6ec
+  add.txt    keys: U+e794
+  modify.txt keys: U+fe17
+
+Value: 0xa6ed
+  add.txt    keys: U+e795
+  modify.txt keys: U+fe18
+
+Value: 0xa6f3
+  add.txt    keys: U+e796
+  modify.txt keys: U+fe19
+
+Value: 0xa8bc
+  add.txt    keys: U+e7c7
+  modify.txt keys: U+1e3f
+
+Value: 0xa8bf
+  add.txt    keys: U+e7c8
+  modify.txt keys: U+01f9
+
+Value: 0xa989
+  add.txt    keys: U+e7e7
+  modify.txt keys: U+303e
+
+Value: 0xa98a
+  add.txt    keys: U+e7e8
+  modify.txt keys: U+2ff0
+
+Value: 0xa98b
+  add.txt    keys: U+e7e9
+  modify.txt keys: U+2ff1
+
+Value: 0xa98c
+  add.txt    keys: U+e7ea
+  modify.txt keys: U+2ff2
+
+Value: 0xa98d
+  add.txt    keys: U+e7eb
+  modify.txt keys: U+2ff3
+
+Value: 0xa98e
+  add.txt    keys: U+e7ec
+  modify.txt keys: U+2ff4
+
+Value: 0xa98f
+  add.txt    keys: U+e7ed
+  modify.txt keys: U+2ff5
+
+Value: 0xa990
+  add.txt    keys: U+e7ee
+  modify.txt keys: U+2ff6
+
+Value: 0xa991
+  add.txt    keys: U+e7ef
+  modify.txt keys: U+2ff7
+
+Value: 0xa992
+  add.txt    keys: U+e7f0
+  modify.txt keys: U+2ff8
+
+Value: 0xa993
+  add.txt    keys: U+e7f1
+  modify.txt keys: U+2ff9
+
+Value: 0xa994
+  add.txt    keys: U+e7f2
+  modify.txt keys: U+2ffa
+
+Value: 0xa995
+  add.txt    keys: U+e7f3
+  modify.txt keys: U+2ffb
+
+Value: 0xfe50
+  add.txt    keys: U+e815
+  modify.txt keys: U+2e81
+
+Value: 0xfe54
+  add.txt    keys: U+e819
+  modify.txt keys: U+2e84
+
+Value: 0xfe55
+  add.txt    keys: U+e81a
+  modify.txt keys: U+3473
+
+Value: 0xfe56
+  add.txt    keys: U+e81b
+  modify.txt keys: U+3447
+
+Value: 0xfe57
+  add.txt    keys: U+e81c
+  modify.txt keys: U+2e88
+
+Value: 0xfe58
+  add.txt    keys: U+e81d
+  modify.txt keys: U+2e8b
+
+Value: 0xfe59
+  add.txt    keys: U+e81e
+  modify.txt keys: U+9fb4
+
+Value: 0xfe5a
+  add.txt    keys: U+e81f
+  modify.txt keys: U+359e
+
+Value: 0xfe5b
+  add.txt    keys: U+e820
+  modify.txt keys: U+361a
+
+Value: 0xfe5c
+  add.txt    keys: U+e821
+  modify.txt keys: U+360e
+
+Value: 0xfe5d
+  add.txt    keys: U+e822
+  modify.txt keys: U+2e8c
+
+Value: 0xfe5e
+  add.txt    keys: U+e823
+  modify.txt keys: U+2e97
+
+Value: 0xfe5f
+  add.txt    keys: U+e824
+  modify.txt keys: U+396e
+
+Value: 0xfe60
+  add.txt    keys: U+e825
+  modify.txt keys: U+3918
+
+Value: 0xfe61
+  add.txt    keys: U+e826
+  modify.txt keys: U+9fb5
+
+Value: 0xfe62
+  add.txt    keys: U+e827
+  modify.txt keys: U+39cf
+
+Value: 0xfe63
+  add.txt    keys: U+e828
+  modify.txt keys: U+39df
+
+Value: 0xfe64
+  add.txt    keys: U+e829
+  modify.txt keys: U+3a73
+
+Value: 0xfe65
+  add.txt    keys: U+e82a
+  modify.txt keys: U+39d0
+
+Value: 0xfe66
+  add.txt    keys: U+e82b
+  modify.txt keys: U+9fb6
+
+Value: 0xfe67
+  add.txt    keys: U+e82c
+  modify.txt keys: U+9fb7
+
+Value: 0xfe68
+  add.txt    keys: U+e82d
+  modify.txt keys: U+3b4e
+
+Value: 0xfe69
+  add.txt    keys: U+e82e
+  modify.txt keys: U+3c6e
+
+Value: 0xfe6a
+  add.txt    keys: U+e82f
+  modify.txt keys: U+3ce0
+
+Value: 0xfe6b
+  add.txt    keys: U+e830
+  modify.txt keys: U+2ea7
+
+Value: 0xfe6d
+  add.txt    keys: U+e832
+  modify.txt keys: U+9fb8
+
+Value: 0xfe6e
+  add.txt    keys: U+e833
+  modify.txt keys: U+2eaa
+
+Value: 0xfe6f
+  add.txt    keys: U+e834
+  modify.txt keys: U+4056
+
+Value: 0xfe70
+  add.txt    keys: U+e835
+  modify.txt keys: U+415f
+
+Value: 0xfe71
+  add.txt    keys: U+e836
+  modify.txt keys: U+2eae
+
+Value: 0xfe72
+  add.txt    keys: U+e837
+  modify.txt keys: U+4337
+
+Value: 0xfe73
+  add.txt    keys: U+e838
+  modify.txt keys: U+2eb3
+
+Value: 0xfe74
+  add.txt    keys: U+e839
+  modify.txt keys: U+2eb6
+
+Value: 0xfe75
+  add.txt    keys: U+e83a
+  modify.txt keys: U+2eb7
+
+Value: 0xfe77
+  add.txt    keys: U+e83c
+  modify.txt keys: U+43b1
+
+Value: 0xfe78
+  add.txt    keys: U+e83d
+  modify.txt keys: U+43ac
+
+Value: 0xfe79
+  add.txt    keys: U+e83e
+  modify.txt keys: U+2ebb
+
+Value: 0xfe7a
+  add.txt    keys: U+e83f
+  modify.txt keys: U+43dd
+
+Value: 0xfe7b
+  add.txt    keys: U+e840
+  modify.txt keys: U+44d6
+
+Value: 0xfe7c
+  add.txt    keys: U+e841
+  modify.txt keys: U+4661
+
+Value: 0xfe7d
+  add.txt    keys: U+e842
+  modify.txt keys: U+464c
+
+Value: 0xfe7e
+  add.txt    keys: U+e843
+  modify.txt keys: U+9fb9
+
+Value: 0xfe80
+  add.txt    keys: U+e844
+  modify.txt keys: U+4723
+
+Value: 0xfe81
+  add.txt    keys: U+e845
+  modify.txt keys: U+4729
+
+Value: 0xfe82
+  add.txt    keys: U+e846
+  modify.txt keys: U+477c
+
+Value: 0xfe83
+  add.txt    keys: U+e847
+  modify.txt keys: U+478d
+
+Value: 0xfe84
+  add.txt    keys: U+e848
+  modify.txt keys: U+2eca
+
+Value: 0xfe85
+  add.txt    keys: U+e849
+  modify.txt keys: U+4947
+
+Value: 0xfe86
+  add.txt    keys: U+e84a
+  modify.txt keys: U+497a
+
+Value: 0xfe87
+  add.txt    keys: U+e84b
+  modify.txt keys: U+497d
+
+Value: 0xfe88
+  add.txt    keys: U+e84c
+  modify.txt keys: U+4982
+
+Value: 0xfe89
+  add.txt    keys: U+e84d
+  modify.txt keys: U+4983
+
+Value: 0xfe8a
+  add.txt    keys: U+e84e
+  modify.txt keys: U+4985
+
+Value: 0xfe8b
+  add.txt    keys: U+e84f
+  modify.txt keys: U+4986
+
+Value: 0xfe8c
+  add.txt    keys: U+e850
+  modify.txt keys: U+499f
+
+Value: 0xfe8d
+  add.txt    keys: U+e851
+  modify.txt keys: U+499b
+
+Value: 0xfe8e
+  add.txt    keys: U+e852
+  modify.txt keys: U+49b7
+
+Value: 0xfe8f
+  add.txt    keys: U+e853
+  modify.txt keys: U+49b6
+
+Value: 0xfe90
+  add.txt    keys: U+e854
+  modify.txt keys: U+9fba
+
+Value: 0xfe92
+  add.txt    keys: U+e856
+  modify.txt keys: U+4ca3
+
+Value: 0xfe93
+  add.txt    keys: U+e857
+  modify.txt keys: U+4c9f
+
+Value: 0xfe94
+  add.txt    keys: U+e858
+  modify.txt keys: U+4ca0
+
+Value: 0xfe95
+  add.txt    keys: U+e859
+  modify.txt keys: U+4ca1
+
+Value: 0xfe96
+  add.txt    keys: U+e85a
+  modify.txt keys: U+4c77
+
+Value: 0xfe97
+  add.txt    keys: U+e85b
+  modify.txt keys: U+4ca2
+
+Value: 0xfe98
+  add.txt    keys: U+e85c
+  modify.txt keys: U+4d13
+
+Value: 0xfe99
+  add.txt    keys: U+e85d
+  modify.txt keys: U+4d14
+
+Value: 0xfe9a
+  add.txt    keys: U+e85e
+  modify.txt keys: U+4d15
+
+Value: 0xfe9b
+  add.txt    keys: U+e85f
+  modify.txt keys: U+4d16
+
+Value: 0xfe9c
+  add.txt    keys: U+e860
+  modify.txt keys: U+4d17
+
+Value: 0xfe9d
+  add.txt    keys: U+e861
+  modify.txt keys: U+4d18
+
+Value: 0xfe9e
+  add.txt    keys: U+e862
+  modify.txt keys: U+4d19
+
+Value: 0xfe9f
+  add.txt    keys: U+e863
+  modify.txt keys: U+4dae
+
+Value: 0xfea0
+  add.txt    keys: U+e864
+  modify.txt keys: U+9fbb
+
